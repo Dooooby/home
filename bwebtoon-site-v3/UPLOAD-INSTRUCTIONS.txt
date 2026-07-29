@@ -1,0 +1,19 @@
+GitHub 업로드 구조
+
+index.html (기존 파일 교체)
+exhibition/index.html
+schedule/index.html
+opening-ceremony/index.html
+business-meeting/index.html
+
+GitHub에서 Add file > Create new file을 누르고 위 경로를 그대로 입력하면 폴더가 자동 생성됩니다.
+배포 주소:
+/archive 메뉴 -> /exhibition/
+/program 행사일정 -> /schedule/
+/program 개막식 -> /opening-ceremony/
+/program 비즈니스미팅 -> /business-meeting/
+
+
+[수정사항]
+- schedule, opening-ceremony, business-meeting 페이지 상단 메뉴는 HOME만 표시됩니다.
+- 페이지 안의 행사일정/개막식/비즈니스미팅 탭은 유지됩니다.
