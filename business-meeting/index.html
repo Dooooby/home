@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Meeting Archive — B·WEBTOON 10TH</title>
+  <meta name="description" content="부산글로벌웹툰페스티벌 비즈미팅 작품전 아카이브" />
+  <style>
+    :root{
+      --bg:#d9dce0;
+      --ink:#101216;
+      --line:rgba(15,18,22,.22);
+      --muted:#626872;
+      --accent:#e31818;
+      --pad:clamp(20px,4vw,64px);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--bg);color:var(--ink);
+      font-family:Arial,"Pretendard","Noto Sans KR",sans-serif;
+      letter-spacing:-.02em;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    .nav{
+      position:sticky;top:0;z-index:20;
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:72px;padding:0 var(--pad);
+      background:rgba(217,220,224,.88);backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line)
+    }
+    .brand{font-weight:900;letter-spacing:-.05em}
+    .nav-links{display:flex;gap:24px;font-size:13px;text-transform:uppercase}
+    .nav-links a:last-child{border-bottom:1px solid}
+    .hero{
+      padding:90px var(--pad) 64px;
+      border-bottom:1px solid var(--line);
+      min-height:72vh;display:grid;align-content:space-between;
+    }
+    .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    h1{
+      margin:18px 0 0;font-size:clamp(64px,12.6vw,190px);
+      line-height:.78;letter-spacing:-.085em;font-weight:900;
+      max-width:1500px
+    }
+    .hero-bottom{
+      display:grid;grid-template-columns:1fr 1fr;gap:40px;
+      align-items:end;margin-top:72px
+    }
+    .hero-copy{max-width:620px;font-size:clamp(18px,2vw,28px);line-height:1.35}
+    .hero-meta{justify-self:end;text-align:right;font-size:13px;line-height:1.8}
+    .toolbar{
+      padding:24px var(--pad);border-bottom:1px solid var(--line);
+      display:grid;grid-template-columns:1fr auto auto;gap:12px;
+      position:sticky;top:72px;z-index:15;background:var(--bg)
+    }
+    .search{
+      width:100%;border:0;border-bottom:1px solid var(--ink);
+      background:transparent;padding:10px 0;outline:none
+    }
+    .select,.view-btn{
+      border:1px solid var(--ink);background:transparent;padding:10px 14px;
+      min-width:132px
+    }
+    .stats{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px var(--pad);font-size:12px;text-transform:uppercase;
+      letter-spacing:.06em;border-bottom:1px solid var(--line)
+    }
+    .grid{
+      padding:0 var(--pad) 100px;
+      display:grid;grid-template-columns:repeat(12,1fr);
+      border-bottom:1px solid var(--line)
+    }
+    .card{
+      grid-column:span 4;padding:28px 18px 46px;
+      border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+      cursor:pointer;transition:background .2s ease
+    }
+    .card:nth-child(3n){border-right:0}
+    .card:hover{background:#cfd3d8}
+    .thumb{
+      aspect-ratio:4/5;overflow:hidden;background:#ddd;position:relative
+    }
+    .thumb svg{width:100%;height:100%;display:block;transition:transform .5s ease}
+    .card:hover .thumb svg{transform:scale(1.025)}
+    .badge{
+      position:absolute;top:12px;left:12px;background:var(--bg);
+      padding:7px 9px;font-size:10px;letter-spacing:.08em;text-transform:uppercase
+    }
+    .card-index{font-size:11px;margin-top:16px;color:var(--muted)}
+    .card h2{font-size:clamp(24px,2.5vw,42px);line-height:.95;margin:14px 0 12px;letter-spacing:-.055em}
+    .creator{font-size:14px;margin-bottom:22px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tag{border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:11px}
+    .featured{
+      display:grid;grid-template-columns:1.3fr .7fr;
+      padding:90px var(--pad);gap:50px;border-bottom:1px solid var(--line)
+    }
+    .featured-art{min-height:620px;background:#121212}
+    .featured-art svg{width:100%;height:100%}
+    .featured-copy{display:flex;flex-direction:column;justify-content:space-between}
+    .featured-copy h2{font-size:clamp(50px,7vw,105px);line-height:.83;margin:18px 0;letter-spacing:-.075em}
+    .featured-copy p{font-size:17px;line-height:1.7;max-width:500px}
+    .btn{
+      display:inline-flex;justify-content:space-between;gap:28px;
+      border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+      padding:16px 0;text-transform:uppercase;font-size:13px
+    }
+    .guide{
+      padding:90px var(--pad);display:grid;grid-template-columns:.7fr 1.3fr;
+      gap:60px;border-bottom:1px solid var(--line)
+    }
+    .guide h2{font-size:clamp(50px,7vw,110px);line-height:.82;margin:0;letter-spacing:-.075em}
+    .steps{counter-reset:step}
+    .step{
+      display:grid;grid-template-columns:70px 1fr;gap:18px;padding:25px 0;
+      border-top:1px solid var(--line)
+    }
+    .step:last-child{border-bottom:1px solid var(--line)}
+    .step b{font-size:13px}.step h3{font-size:24px;margin:0 0 8px}.step p{margin:0;color:var(--muted);line-height:1.6}
+    footer{
+      min-height:55vh;padding:70px var(--pad);
+      background:var(--ink);color:var(--bg);display:flex;flex-direction:column;justify-content:space-between
+    }
+    footer h2{font-size:clamp(55px,10vw,155px);line-height:.8;margin:0;letter-spacing:-.08em}
+    .footer-bottom{display:flex;justify-content:space-between;gap:30px;font-size:12px;line-height:1.7}
+    dialog{
+      border:0;padding:0;width:min(1080px,94vw);max-height:92vh;background:var(--bg);
+      box-shadow:0 30px 100px rgba(0,0,0,.35)
+    }
+    dialog::backdrop{background:rgba(0,0,0,.72)}
+    .modal{display:grid;grid-template-columns:1fr 1fr;min-height:650px}
+    .modal-visual{background:#171717}.modal-visual svg{width:100%;height:100%}
+    .modal-info{padding:36px;display:flex;flex-direction:column}
+    .close{align-self:flex-end;border:0;background:none;font-size:28px;cursor:pointer}
+    .modal-info h3{font-size:50px;line-height:.9;letter-spacing:-.06em;margin:80px 0 12px}
+    .modal-info p{line-height:1.7}
+    .modal-actions{margin-top:auto;display:grid;gap:10px}
+    .primary{border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:15px}
+    .secondary{border:1px solid var(--ink);background:transparent;padding:15px}
+    .empty{grid-column:1/-1;padding:80px 0;text-align:center}
+    @media(max-width:900px){
+      .nav-links a:not(:last-child){display:none}
+      .hero{min-height:62vh}.hero-bottom{grid-template-columns:1fr}.hero-meta{justify-self:start;text-align:left}
+      .toolbar{grid-template-columns:1fr 1fr}.search{grid-column:1/-1}
+      .card{grid-column:span 6}.card:nth-child(3n){border-right:1px solid var(--line)}.card:nth-child(2n){border-right:0}
+      .featured,.guide,.modal{grid-template-columns:1fr}
+      .featured-art{min-height:520px}.guide{gap:45px}.modal-visual{min-height:420px}
+    }
+    @media(max-width:620px){
+      .nav{min-height:60px}.toolbar{top:60px}
+      h1{font-size:20vw}.hero{padding-top:60px}
+      .toolbar{grid-template-columns:1fr}.select,.view-btn{width:100%}
+      .card{grid-column:1/-1;border-right:0!important;padding-left:0;padding-right:0}
+      .featured,.guide{padding-top:65px;padding-bottom:65px}.featured-art{min-height:420px}
+      .footer-bottom{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="../index.html">B·WEBTOON<br>10TH</a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="../index.html#story">Story</a><a href="../index.html#archive">Archive</a><a href="../index.html#program">Program</a>
+      <a href="../index.html#world">World</a><a href="../index.html#visit">Visit</a><a href="#works">Business Meeting</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Business Meeting Exhibition · 2026</div>
+        <h1>STORIES<br>MEET<br>BUSINESS.</h1>
+      </div>
+      <div class="hero-bottom">
+        <p class="hero-copy">
+          창작자의 세계가 새로운 파트너를 만나는 곳.<br>
+          피칭·제작·유통·IP 확장을 위한 작품 아카이브입니다.
+        </p>
+        <div class="hero-meta">
+          2026. 10. 30—11. 1<br>
+          BUSAN CONTENTS COMPLEX<br>
+          ONLINE ARCHIVE / ON-SITE MEETING
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="작품명, 작가명, 키워드 검색" aria-label="작품 검색">
+        <select id="genre" class="select" aria-label="장르 선택">
+          <option value="all">ALL GENRES</option>
+          <option value="drama">DRAMA</option>
+          <option value="fantasy">FANTASY</option>
+          <option value="romance">ROMANCE</option>
+          <option value="thriller">THRILLER</option>
+          <option value="documentary">DOCUMENTARY</option>
+        </select>
+        <select id="status" class="select" aria-label="비즈니스 상태 선택">
+          <option value="all">ALL STATUS</option>
+          <option value="meeting">MEETING OPEN</option>
+          <option value="rights">RIGHTS AVAILABLE</option>
+          <option value="production">IN PRODUCTION</option>
+        </select>
+      </div>
+      <div class="stats"><span>Selected Works</span><span id="count">06 Projects</span></div>
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <section class="featured">
+      <div class="featured-art">
+        <svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="이달의 추천 작품 추상 이미지">
+          <rect width="800" height="900" fill="#0d0d0d"/>
+          <circle cx="410" cy="380" r="260" fill="#f35a2c"/>
+          <path d="M0 730 C170 570 280 850 460 670 C600 530 690 650 800 550 V900 H0Z" fill="#f1eee7"/>
+          <path d="M250 0 L520 900" stroke="#f1eee7" stroke-width="18"/>
+          <text x="52" y="88" fill="#f1eee7" font-size="34" font-family="Arial" font-weight="700">CURATOR'S PICK 01</text>
+        </svg>
+      </div>
+      <div class="featured-copy">
+        <div>
+          <div class="eyebrow">Curator's Pick · IP Expansion</div>
+          <h2>THE<br>LAST<br>WAVE</h2>
+          <p>해수면이 상승한 부산을 배경으로 한 재난 드라마. 영상화와 글로벌 공동 제작에 적합한 확장형 세계관을 갖춘 프로젝트입니다.</p>
+        </div>
+        <a class="btn" href="#works"><span>View Project</span><span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="guide">
+      <h2>HOW TO<br>MEET.</h2>
+      <div class="steps">
+        <div class="step"><b>01</b><div><h3>작품 탐색</h3><p>장르, 제작 단계, 권리 상태를 기준으로 관심 작품을 찾습니다.</p></div></div>
+        <div class="step"><b>02</b><div><h3>상세 자료 확인</h3><p>로그라인, 시놉시스, 타깃, 회차, 작가 이력과 희망 협업 분야를 확인합니다.</p></div></div>
+        <div class="step"><b>03</b><div><h3>미팅 요청</h3><p>참가자 인증 후 가능한 시간대를 선택하고 요청 메시지를 전달합니다.</p></div></div>
+        <div class="step"><b>04</b><div><h3>현장 또는 온라인 미팅</h3><p>승인된 미팅은 일정표와 알림을 통해 관리합니다.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h2>MAKE THE<br>NEXT CHAPTER.</h2>
+    <div class="footer-bottom">
+      <div>BUSAN GLOBAL WEBTOON FESTIVAL<br>BUSINESS MEETING ARCHIVE</div>
+      <div>Contact<br>business@bwebtoon.kr<br>+82 51 000 0000</div>
+      <div><a href="../index.html">← BACK TO MAIN</a><br>© 2026 ALL RIGHTS RESERVED</div>
+    </div>
+  </footer>
+
+  <dialog id="detailDialog">
+    <div class="modal">
+      <div id="modalVisual" class="modal-visual"></div>
+      <div class="modal-info">
+        <button class="close" aria-label="닫기">×</button>
+        <div class="eyebrow" id="modalMeta"></div>
+        <h3 id="modalTitle"></h3>
+        <p id="modalCreator"></p>
+        <p id="modalDesc"></p>
+        <div id="modalTags" class="tags"></div>
+        <div class="modal-actions">
+          <button class="primary">비즈미팅 신청하기 →</button>
+          <button class="secondary">소개서 다운로드 ↓</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+<script>
+const works = [
+  {title:"The Last Wave", creator:"김도윤 · Studio Tide", genre:"drama", status:"meeting", label:"MEETING OPEN", desc:"해수면이 상승한 부산에서 살아남은 가족의 선택을 그린 재난 드라마.", tags:["영상화","글로벌 공동제작","12+"], colors:["#121212","#ff5b2d","#f3f0e9"]},
+  {title:"Moon Rabbit Office", creator:"박하린", genre:"fantasy", status:"rights", label:"RIGHTS AVAILABLE", desc:"야근하는 직장인 앞에 나타난 달 토끼가 소원을 대행하는 오피스 판타지.", tags:["애니메이션","캐릭터 IP","전체"], colors:["#ced5ff","#171717","#f7ee76"]},
+  {title:"Blue Line 2:17", creator:"이재민 · Frame 217", genre:"thriller", status:"production", label:"IN PRODUCTION", desc:"매일 새벽 2시 17분, 사라지는 지하철 한 칸을 추적하는 미스터리 스릴러.", tags:["OTT","시즌제","15+"], colors:["#0c2c4d","#dfe9ea","#ef432f"]},
+  {title:"Our Small Planet", creator:"최수아", genre:"romance", status:"meeting", label:"MEETING OPEN", desc:"폐업 직전의 동네 천문관에서 시작되는 두 청춘의 로맨스.", tags:["드라마","OST","12+"], colors:["#ede1ca","#bf4b37","#24334a"]},
+  {title:"Salt City", creator:"정세온 · Busan Sketch", genre:"documentary", status:"rights", label:"RIGHTS AVAILABLE", desc:"부산의 사라지는 풍경과 그곳을 지키는 사람들을 기록한 옴니버스.", tags:["지역 IP","다큐툰","전체"], colors:["#dad3c7","#1a1a18","#567a82"]},
+  {title:"Ghost Delivery", creator:"오민지", genre:"fantasy", status:"meeting", label:"MEETING OPEN", desc:"망자의 마지막 물건을 배달하는 야간 택배기사의 도시 판타지.", tags:["게임","영화","15+"], colors:["#292044","#ef6947","#e7e4d8"]}
+];
+
+function artSvg(colors, index){
+  const [a,b,c]=colors;
+  return `<svg viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="600" height="750" fill="${a}"/>
+    <circle cx="${180 + (index%3)*80}" cy="${220 + (index%2)*110}" r="${120 + index*5}" fill="${b}"/>
+    <path d="M0 ${530-index*18} C150 ${420+index*14}, 300 ${690-index*20}, 600 ${470+index*10} V750 H0Z" fill="${c}"/>
+    <path d="M${100+index*20} 0 L${420-index*15} 750" stroke="${c}" stroke-width="${10+index*2}" opacity=".9"/>
+    <text x="28" y="704" font-family="Arial" font-size="18" font-weight="700" fill="${index%2?b:c}">B·WEBTOON / PROJECT ${String(index+1).padStart(2,"0")}</text>
+  </svg>`;
+}
+
+const grid=document.getElementById("grid");
+const count=document.getElementById("count");
+const search=document.getElementById("search");
+const genre=document.getElementById("genre");
+const status=document.getElementById("status");
+const dialog=document.getElementById("detailDialog");
+
+function render(){
+  const q=search.value.trim().toLowerCase();
+  const filtered=works.filter(w =>
+    (genre.value==="all"||w.genre===genre.value) &&
+    (status.value==="all"||w.status===status.value) &&
+    (`${w.title} ${w.creator} ${w.desc} ${w.tags.join(" ")}`.toLowerCase().includes(q))
+  );
+  count.textContent=`${String(filtered.length).padStart(2,"0")} Projects`;
+  grid.innerHTML=filtered.length?filtered.map((w,i)=>`
+    <article class="card" tabindex="0" data-title="${w.title}">
+      <div class="thumb">${artSvg(w.colors, works.indexOf(w))}<span class="badge">${w.label}</span></div>
+      <div class="card-index">${String(works.indexOf(w)+1).padStart(2,"0")} / 06 · ${w.genre.toUpperCase()}</div>
+      <h2>${w.title}</h2>
+      <div class="creator">${w.creator}</div>
+      <div class="tags">${w.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    </article>`).join(""):`<div class="empty">검색 결과가 없습니다.</div>`;
+  document.querySelectorAll(".card").forEach(card=>{
+    const open=()=>showDetail(works.find(w=>w.title===card.dataset.title));
+    card.addEventListener("click",open);
+    card.addEventListener("keydown",e=>{if(e.key==="Enter")open()});
+  });
+}
+function showDetail(w){
+  document.getElementById("modalVisual").innerHTML=artSvg(w.colors,works.indexOf(w));
+  document.getElementById("modalMeta").textContent=`${w.label} · ${w.genre.toUpperCase()}`;
+  document.getElementById("modalTitle").textContent=w.title;
+  document.getElementById("modalCreator").textContent=w.creator;
+  document.getElementById("modalDesc").textContent=w.desc+" 본 상세 페이지에는 전체 시놉시스, 작품 규격, 제작 단계, 타깃 독자, 작가 소개, 희망 협업 분야와 담당자 연락처를 배치할 수 있습니다.";
+  document.getElementById("modalTags").innerHTML=w.tags.map(t=>`<span class="tag">${t}</span>`).join("");
+  dialog.showModal();
+}
+[search,genre,status].forEach(el=>el.addEventListener("input",render));
+document.querySelector(".close").addEventListener("click",()=>dialog.close());
+dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
+render();
+</script>
+</body>
+</html>
